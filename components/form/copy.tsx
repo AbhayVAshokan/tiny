@@ -11,7 +11,7 @@ interface CopyProps {
 const Copy = ({ value }: CopyProps) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(value);
-    toast("URL copied to clipboard!", {icon: <Check />});
+    toast("URL copied to clipboard!", { icon: <Check /> });
   };
 
   return (

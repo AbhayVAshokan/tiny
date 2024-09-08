@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme/provider";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { Toaster } from "@/components/ui/sonner";
 import Copyright from "../components/common/copyright";
+import TRPCProvider from "@/app/_trpc/provider";
 import "./globals.css";
 
 const TITLE = "Tiny";
@@ -50,7 +51,7 @@ const RootLayout = ({
           disableTransitionOnChange
         >
           <ModeToggle />
-          {children}
+          <TRPCProvider>{children}</TRPCProvider>
           <Copyright />
           <Toaster />
         </ThemeProvider>
