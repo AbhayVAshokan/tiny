@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/provider";
 import { ModeToggle } from "@/components/theme/mode-toggle";
+import { Toaster } from "@/components/ui/sonner";
+import Copyright from "./common/copyright";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,6 +40,8 @@ export default function RootLayout({
         >
           <ModeToggle />
           {children}
+          <Copyright />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
