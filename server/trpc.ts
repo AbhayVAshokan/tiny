@@ -1,8 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import { initTRPC } from "@trpc/server";
 import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
+import prisma from "./prisma";
 
-const prisma = new PrismaClient();
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createTRPCContext = (_opts: FetchCreateContextFnOptions) => ({ prisma });
 
