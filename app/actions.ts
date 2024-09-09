@@ -1,10 +1,11 @@
 "use server";
 
-type State = { shortUrl: string };
+import prisma from "../server/prisma";
 
-export const generateURL = async (_state: State, formData: FormData): Promise<State> => {
-  await new Promise((resolve) => setTimeout(resolve, 250));
-  return {
-    shortUrl: formData.get("longUrl") as string
-  };
+export const getLongUrl = async (shortUrl: string): Promise<string | null> => {
+  const url = await prisma.url.findFirst({
+    where: { shortUrl },
+    select: { longUrl: true },
+  });
+  return url ? url.longUrl : url;
 };
