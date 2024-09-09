@@ -11,7 +11,7 @@ const URL_PATTERN =
   "[Hh][Tt][Tt][Pp][Ss]?://(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::d{2,5})?(?:/[^s]*)?";
 
 const Form = () => {
-  const [shortURL, setShortURL] = useState<string | undefined>();
+  const [shortUrl, setShortURL] = useState<string | undefined>();
   const { mutate: generate, isLoading } = trpc.generate.useMutation();
 
   // TODO for my future self: This does not give out the right vibes.
@@ -24,7 +24,7 @@ const Form = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     generate(
-      { longURL: new FormData(e.target as HTMLFormElement).get("longURL") as string },
+      { longUrl: new FormData(e.target as HTMLFormElement).get("longUrl") as string },
       { onSuccess: setShortURL }
     );
   };
@@ -36,7 +36,7 @@ const Form = () => {
           required
           autoFocus
           autoComplete="off"
-          name="longURL"
+          name="longUrl"
           placeholder="https://example.com"
           pattern={URL_PATTERN}
           title="Enter a valid URL"
@@ -47,10 +47,10 @@ const Form = () => {
         </Button>
       </div>
 
-      {shortURL && (
-        <div className=" flex items-center justify-between space-x-4 rounded-md border px-4">
-          <p className="text-sm font-medium leading-none">{shortURL}</p>
-          <Copy value={shortURL} />
+      {shortUrl && (
+        <div className=" flex items-center justify-between space-x-4 rounded-md border px-4 bg-muted">
+          <p className="text-sm">{`${process.env.NEXT_PUBLIC_APP_URL}/${shortUrl}`}</p>
+          <Copy value={`${process.env.NEXT_PUBLIC_APP_URL}/${shortUrl}`} />
         </div>
       )}
     </form>
